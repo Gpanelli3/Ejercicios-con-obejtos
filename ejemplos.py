@@ -120,10 +120,10 @@ class Agenda():
                 print(i)
 
     def buscarContactos(self):
-        for i in self.agenda:
-            self.buscar=input("ingresar nombre a buscar")
-            if self.buscar == i.nombre:
-                print('encontre a tu contacto', i.nombre)
+        for i in range(len(self.agenda)):
+            buscar=input("ingresar nombre a buscar")
+            if buscar == self.agenda[i]:
+                print('encontre a tu contacto', self.agenda[i])
             else:
                 print('no existe')
 
@@ -154,8 +154,8 @@ class Agenda():
             
         
 
-agendar=Agenda()
+#agendar=Agenda()
+#agendar.menu()
 
-agendar.menu()
 
 #--------------------------------------------------------------------------------------------------------------

@@ -15,9 +15,9 @@ class Coleccion:
         for elemento in self.lista_alumnos:
             print(elemento.nombre,elemento.apellido,elemento.edad)
 
-curso=Coleccion()
-curso.mostrar_lista()
-
+#curso=Coleccion()
+#curso.mostrar_lista()
+#------------------------------------------------------------------------------
 
 class Socio:
     def __init__(self,nombre,antiguedad):
@@ -26,29 +26,34 @@ class Socio:
 
 
 class Club:
+        
         lista_socios=[]
-        antig_1=0
-
 
         for i in range(0,3):
             nombre=input('nombre')
             antiguedad=int(input('antiguedad'))
+            lista_socios.append(Socio(nombre,antiguedad))
 
-            
-            if antiguedad>antig_1:
-                #lista_socios = []
-                lista_socios.append(Socio(nombre,antiguedad))
-                antiguedad=antig_1
-                
 
 
         def mostrar(self):
+            self.antig_1=0
+            self.socio_antiguo=''
+
             for i in self.lista_socios:
-                print ('el socio mas antiguo es: ', i.nombre,i.antiguedad)
+                if i.antiguedad>self.antig_1:
+                    self.socio_antiguo=i.nombre
+                    self.antig_1=i.antiguedad
+            print ('el socio mas antiguo es: ',self.socio_antiguo,self.antig_1)
+
             
 
 #clubes=Club()
 #clubes.mostrar()
+                
+
+
+            
 
                 
 
