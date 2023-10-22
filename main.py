@@ -1,146 +1,65 @@
-#Las FUNCIONES son CLAVES, hay que utilizarlas siempre que podamos. Sino tambien utilizarla para empaquetar cosas,
-#nos hara el codigo mas mantenible.
 
-#OBJETOS tenemos todo junto, por un lado tenemos las caracteristicas(atributos) y por otro el comportamiento que tienen esos datos(metodos)
-#Una clase es algo general, despues podemos modificar esas clases y tranformamos en objetos que es lo particular
+#EJERCICIOS----------------------------------------------------------------
 
-
-#clase
-class Auto:
-    marca='fiat'
-    color='white'
-    aceleracion=40
-    combustible=10
-    encendido=False
-
-    def encender(self):
-        self.encendido=True #SELF hace referencia a un dato de la propia clase
-
-#creamos otro objeto y llamamos al metodo encender() 
-#otroAuto = Auto()
-#otroAuto.encender()
-#print(otroAuto.encendido)
-
-#instanciar una clase(creamos un objeto)
-myAuto=Auto()
-#print(myAuto.marca)
-
-#otro auto
-#myAuto.marca='citroen'
-#print(myAuto.marca)
-
-
-
-class Persona:
-    nombre=''
-    apellido=''
-
-    def mostrar(self):
-        print(self.nombre)
-        print(self.apellido)
-
-
-
-
-
-#CONSTRUCTOR
-
-class Calculadora:
-    def __init__(self):
-        self.msje=print('Caluladora')
-        self.numero_1=int(input('ingresar el primer numero'))
-        self.numero_2=int(input('ingresar el segundo numero'))
-
-    def sumar(self):
-        suma=self.numero_1+self.numero_2
-        print(suma)
-
-#myCalculadora=Calculadora()
-#myCalculadora.sumar()
-
-#------------------------------------------------------------------------------
 #DESAFIO 
 #un banco tiene 3 clientes que pueden hacer depositos y extracciones 
 # se requiere que el banco calcule al finalizar el dia la cantidad de dinero que hay depositado y tambien el saldo que posee cada cliente
 
+class Cliente():
+    def __init__(self):
+        self.cliente1=''
+         
+    def ingreso(self):
+            self.person=input('ingrese su nombre de cliente')
+            self.cliente1=self.person
+
+            if self.person == self.cliente1:
+                print('BIENVENIDO ', self.cliente1)
+            
 class Banco():     
     def __init__(self):
-        self.cliente1='Fernando'
-        self.cliente2='Agustin'
-        self.cliente3='Marcela'
 
         self.total_depositado=0
         self.deposito_banco=[]
         
         
-        self.saldo1=5000
-        self.saldo2=12000
-        self.saldo3=35000
+        self.saldo=5000
+
 
     def deposito(self):
+        cliente=Cliente()
+        cliente.ingreso()
+
         while True:
-            self.person=input('ingrese su nombre de cliente')
-            if self.person == self.cliente1:
-                print('BIENVENIDO ', self.cliente1, 'AQUI PUEDE DEPOSITAR SU DINERO')
+            depositar=int(input('ingresar el monto a depositar'))
+            #if depositar<self.saldo1:
+                #print('no tiene sufiente saldo, su saldo es de: ', self.saldo1) 
+            #else:
+            self.total_depositado=(self.saldo+depositar)
+
+            print('lo depositado es: ', depositar)
+            print('el saldo que le queda es de: ', self.total_depositado)
+            self.deposito_banco.append(depositar)
+
+            salida=input('desea seguir depositando?')
+            if salida == 'si':
+                True
+            else:
+                break
 
 
-                depositar=int(input('ingresar el monto a depositar'))
-                #if depositar<self.saldo1:
-                    #print('no tiene sufiente saldo, su saldo es de: ', self.saldo1) 
-                #else:
-                self.total_depositado=(self.saldo1-depositar)
+    def extraccion(self):
+        while True:
+            extraer=int(input('ingresa el monto a extraer'))
+            extracciones=(self.total_depositado - extraer)
 
-                print('lo depositado es: ', depositar)
-                print('el saldo que le queda es de: ', self.total_depositado)
-                self.deposito_banco.append(depositar)
+            print('el saldo restante es de: ', extracciones)
 
-                salida=input('desea seguir depositando?')
-                if salida == 'si':
-                    True
-                else:
-                    break
-
-
-
-            elif self.person == self.cliente2:
-                print('BIENVENIDO ', self.cliente2)
-                depositar=int(input('ingresar el monto a depositar'))
-
-                #if depositar<self.saldo2:
-                    #print('no tiene sufiente saldo, su saldo es de: ', self.saldo2) 
-                #else:
-                self.total_depositado=self.saldo2-depositar
-
-                print('lo depositado es: ', depositar)
-                print('el saldo que le queda es de: ', self.total_depositado)
-                self.deposito_banco.append(depositar)
-
-                salida=input('desea seguir depositando?')
-                if salida == 'si':
-                    True
-                else:
-                    break
-
-
-
-            elif self.person == self.cliente3:
-                print('BIENVENIDO ', self.cliente3)
-                depositar=int(input('ingresar el monto a depositar'))
-                #if depositar<self.saldo3:
-                    #print('no tiene sufiente saldo, su saldo es de: ', self.saldo3) 
-                #else:
-                self.total_depositado=self.saldo3-depositar
-
-                print('lo depositado es: ', depositar)
-                print('el saldo que le queda es de: ', self.total_depositado)
-                self.deposito_banco.append(depositar)
-
-                salida=input('desea seguir depositando?')
-                if salida == 'si':
-                    True
-                else:
-                    break
-
+            salida=input('desea seguir extrayendo?')
+            if salida == 'si':
+                True
+            else:
+                break
     
     def mostrar(self):
         total_diario=0
@@ -148,42 +67,154 @@ class Banco():
             total_diario+=i
         print('el total depositado del dia es: ', total_diario)
 
-
-
-
     def cerrar(self):
         print('saliste correctamente')
 
 
     def menu(self):
-        print('AGENDA')
-        while True: 
-            opcion=('1-INGRESAR DATOS. 2-DEPOSITOS. 3-EXTRACCIONES. 4-CERRAR')
+        while True:
+            opcion=int(input('1-DEPOSITOS. 2-EXTRACCIONES. 3-MOSTRAR DATOS. 4-CERRAR'))
 
             if opcion==1:
                 self.deposito()
             elif opcion==2:
                 self.extraccion()
             elif opcion==3:
+                self.mostrar()
+            elif opcion==4:
+                self.cerrar()
+
+
+
+
+#bank=Banco()
+#bank.menu()
+
+
+
+        
+    
+#--------------------------------------------------------------------------------------------------------------
+class Socio:
+    def __init__(self,nombre,antiguedad):
+        self.nombre=nombre
+        self.antiguedad= antiguedad
+        self.lista_socios=[]
+
+        def ingreso(self):
+            for i in range(0,3):
+                self.nombre=input('nombre')
+                self.antiguedad=int(input('antiguedad'))
+                self.lista_socios.append(Socio(nombre,antiguedad))
+
+class Club:
+        def __init__(self):
+            self.antiguo=0
+            self.socio_mas_antiguo=''
+
+        def mostrar(self):
+            ingreso=Socio()
+            ingreso.ingreso()
+
+            for i in self.lista_socios:
+                if i.antiguedad>self.antiguo:
+                    self.self.socio_mas_antiguo=i.nombre
+                    self.antiguo=i.antiguedad
+            print ('el socio mas antiguo es: ',self.socio_mas_antiguo,self.antiguo)
+
+#clubes=Club()
+#clubes.mostrar()
+
+
+#--------------------------------------------------------------------------------------------------------------
+
+#Realizar un programa que conste de una clase llamada Alumno 
+# que tenga como atributos el nombre y la nota del alumno.
+# Definir los métodos para inicializar sus atributos,
+#  imprimirlos y mostrar un mensaje con el resultado de la nota y 
+# si ha aprobado o no.´
+
+
+class Estudiante():
+    def __init__(self):
+        self.nombre=input('ingresar nombre del alumno ')
+        self.nota=int(input('nota'))
+    
+    def mostrarNota(self):
+        if self.nota>7:
+            print('el alumno', self.nombre, 'aprobo con: ', self.nota)
+        else:
+            print('el alumno', self.nombre, 'NO aprobo con: ', self.nota)
+#estudiante1=Estudiante()
+#estudiante1.mostrarNota()
+
+#--------------------------------------------------------------------------------------------------------------
+
+
+#Realizar una clase que administre una agenda. Se debe almacenar para cada contacto el nombre, el teléfono y el email.
+#  Además deberá mostrar un menú con las siguientes opciones
+
+#Añadir contacto
+#Lista de contactos
+#Buscar contacto
+#Editar contacto
+#Cerrar agenda
+
+
+class Agenda():
+    def __init__(self):
+        self.agenda=[]
+
+    def ingresar(self):
+        nombre=input('ingresar nombre')
+        telefono=int(input('telefono'))
+        email=input('email')
+        self.agenda.append({'nombre':nombre,'telefono':telefono,'email':email})
+        print('contacto agendado')
+        print(self.agenda)
+    
+    def listarContactos(self):
+        if len(self.agenda) == 0:
+            print('no hay contactos')
+        else: 
+            for i in self.agenda:
+                print(i)
+
+    def buscarContactos(self):
+        for i in range(len(self.agenda)):
+            buscar=input("ingresar nombre a buscar")
+            if buscar == self.agenda[i]:
+                print('encontre a tu contacto', self.agenda[i])
+            else:
+                print('no existe')
+
+    def editarContacto(self):
+        print('editar contacto')
+    
+    def cerrar(self):
+        print('Agenda cerrada')
+
+
+    def menu(self):
+        while True: 
+            print('AGENDA')
+            self.opt=int(input('1-INGRESAR CONTACTO. 2-LISTAR CONTACTOS. 3- BUSCAR CONTACTOS. 4-EDITAR CONTACTOS. 5-CERRAR AGENDA'))
+
+            if self.opt == 1:
+                self.ingresar()
+            elif self.opt == 2:
+                self.listarContactos()
+            elif self.opt == 3:
+                self.buscarContactos()
+            elif self.opt == 4:
+                self.editarContacto()
+            elif self.opt == 5:
                 self.cerrar()
                 break
-
-
-
-class Cliente():
-    def __init__(self):
-        #def depositar(self,cantidad,saldo):
-            #cantidad=int(input('Ingresar el monto a depositar en el banco'))
-            #saldo+=cantidad
-            #print('la cantidad depositada es: ', cantidad)
-            #print('el saldo es: ', saldo)
-        
-        def extraer(self,extraccion):
-            self.extraccion-=extraccion
-            print('el monto extraido es de: ', self.extraccion)
+                
+            
         
 
-bank=Banco()
-bank.deposito()
-bank.mostrar()
-    
+#agendar=Agenda()
+#agendar.menu()
+#--------------------------------------------------------------------------------------------------------------
